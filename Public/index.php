@@ -6,14 +6,35 @@
  * Time: 9:46 PM
  */
 
-main::start();
+main::start("week4.csv");
 
 class main{
 
-    static public function start(){
+    static public function start($filename){
 
-        $file = fopen("week4.csv","r");
-        print_r(fgetcsv($file));
-        fclose($file);
+        $records = csv::getRecords($filename);
+
+        print_r($records);
     }
+}
+
+class csv{
+
+    static public function getRecords($filename){
+
+        $file = fopen($filename, "r");
+
+        while(! feof($file))
+        {
+
+            $record = fgetcsv($file);
+
+            $records[] = $record;
+        }
+
+        fclose($file);
+        return $records;
+
+    }
+
 }
