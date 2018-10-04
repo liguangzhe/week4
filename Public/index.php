@@ -6,4 +6,14 @@
  * Time: 9:46 PM
  */
 
-echo 'test2123';
+main::start();
+
+class main{
+
+    static public function start(){
+
+        $file = fopen("week4.csv","r");
+        print_r(fgetcsv($file));
+        fclose($file);
+    }
+}
