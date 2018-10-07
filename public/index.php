@@ -27,26 +27,41 @@ class main{
 class html {
 
     public static function generateTable($records) {
-
+        echo '<HR style="FILTER:alpha(opacity=100,finishopacity=0,style=3)" width="80%" color="#987cb9" SIZE=10>';
+        echo '<table>';
+        echo '<thead>';
+        echo '<tbody>';
+        echo '<tr><th>First</th><th>Last</th><th>UCID</th><th>Grade</th></tr>';
+        echo '</thead>';
+        echo '<style>body{text-align:center}</style>';
         foreach($records as $record) {
             $array = $record->returnArray();
-            print_r($array);
+            $First = $array["First"];
+            $Last = $array["Last"];
+            $UCID = $array["UCID"];
+            $Grade = $array["Grade"];
+            echo "<tr><th>$First</th><th>$Last</th><th>$UCID</th><th>$Grade</th></tr>";
+
+            //print_r($array);
         }
+        echo '</tbody>';
+        echo '</table>';
+        
     }
 }
+
+
+
+
 class csv{
 
     static public function getRecords($filename){
 
         $file = fopen($filename, "r");
-
-        $fieldlNames = array();
-
+        $fieldNames = array();
         $count = 0;
-
         while(! feof($file))
         {
-
             $record = fgetcsv($file);
             if($count == 0){
                 $fieldNames = $record;
@@ -58,6 +73,7 @@ class csv{
 
         fclose($file);
         return $records;
+
 
     }
 
